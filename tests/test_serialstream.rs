@@ -42,7 +42,7 @@ fn test_stream_open() {
     let fixture = common::setup_virtual_serial_ports();
     let port = fixture.port_a;
     let builder = mio_serial::new(port, baud_rate);
-    let stream = mio_serial::SerialStream::open(&builder).expect("unable to open serial port");
+    let stream = mio_serial::SerialStream::open(builder).expect("unable to open serial port");
 
     common::assert_baud_rate(&stream, baud_rate);
 }
