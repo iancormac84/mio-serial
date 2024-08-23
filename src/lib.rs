@@ -11,7 +11,7 @@
 #![warn(rust_2018_idioms)]
 
 // Enums, Structs, and Traits from the serialport crate
-pub use serialport::{
+use serialport::{
     // Enums
     ClearBuffer,
     DataBits,
@@ -22,13 +22,8 @@ pub use serialport::{
     Parity,
     // Types
     Result,
-    // Traits
-    SerialPort,
     SerialPortBuilder,
-    SerialPortInfo,
-    SerialPortType,
     StopBits,
-    UsbPortInfo,
 };
 
 // Re-export port-enumerating utility function.
@@ -55,22 +50,15 @@ mod os_prelude {
     pub use mio::windows::NamedPipe;
     pub use serialport::SerialPort as NativeBlockingSerialPort;
     pub use std::ffi::OsStr;
-    pub use std::io::{self, Read, Write};
-    pub use std::mem;
+    pub use std::{io, mem, ptr};
     pub use std::os::windows::ffi::OsStrExt;
-    pub use std::os::windows::io::{AsRawHandle, FromRawHandle, RawHandle};
+    pub use std::os::windows::io::{FromRawHandle, RawHandle};
     pub use std::path::Path;
-    pub use std::ptr;
-    pub use std::time::Duration;
-    pub use winapi::shared::minwindef::TRUE;
     pub use winapi::um::commapi::SetCommTimeouts;
     pub use winapi::um::fileapi::*;
-    pub use winapi::um::handleapi::{DuplicateHandle, INVALID_HANDLE_VALUE};
-    pub use winapi::um::processthreadsapi::GetCurrentProcess;
+    pub use winapi::um::handleapi::INVALID_HANDLE_VALUE;
     pub use winapi::um::winbase::{COMMTIMEOUTS, FILE_FLAG_OVERLAPPED};
-    pub use winapi::um::winnt::{
-        DUPLICATE_SAME_ACCESS, FILE_ATTRIBUTE_NORMAL, GENERIC_READ, GENERIC_WRITE, HANDLE,
-    };
+    pub use winapi::um::winnt::{FILE_ATTRIBUTE_NORMAL, GENERIC_READ, GENERIC_WRITE, HANDLE};
 }
 use os_prelude::*;
 
@@ -105,7 +93,7 @@ impl SerialStream {
     /// let args = mio_serial::new("/dev/ttyUSB0", 9600);
     /// let serial = SerialStream::open(&args).unwrap();
     /// ```
-    pub fn open(builder: crate::SerialPortBuilder) -> crate::Result<Self> {
+    pub fn open(builder: SerialPortBuilder) -> crate::Result<Self> {
         log::debug!("opening serial port in synchronous blocking mode");
         let port = builder.open()?;
         Self::try_from(port)
