@@ -1,13 +1,12 @@
 //! Common test code.  Adapted from `mio/tests/util/mod.rs`
 #![allow(dead_code)]
 use mio::{event::Event, Events, Interest, Poll, Token};
+use mio_serial::SerialStream;
 use std::io::{Read, Write};
 use std::ops::BitOr;
 use std::panic;
 use std::sync::Once;
 use std::time::Duration;
-
-use serialport::SerialPort;
 
 #[cfg(unix)]
 use std::process;
@@ -238,10 +237,7 @@ pub fn setup_virtual_serial_ports() -> Fixture {
 }
 
 /// Assert serial port baud rate matches expected value.
-pub fn assert_baud_rate<P>(port: &P, expected: u32)
-where
-    P: SerialPort,
-{
+pub fn assert_baud_rate(port: &SerialStream, expected: u32) {
     let actual = port.baud_rate().expect("unable to get baud rate");
 
     assert_eq!(actual, expected, "baud rate not equal");

@@ -23,9 +23,8 @@ libudev = ["serialport/libudev"]
 version = "1"
 features = ["os-poll", "os-ext"]
 
-[dependencies.serialport]
-git = "https://github.com/iancormac84/serialport-rs.git"
-default-features = false
+[dependencies]
+serialport = { git = "https://github.com/iancormac84/serialport-rs.git", branch = "5.0.0-proposal-updated-to-main", default-features = false }
 
 [dependencies.log]
 version = "0.4"
