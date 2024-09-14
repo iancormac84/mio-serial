@@ -10,7 +10,7 @@ documentation = "http://docs.rs/mio-serial"
 readme = "README.md"
 keywords = ["rs232", "serial", "mio"]
 categories = ["asynchronous", "hardware-support"]
-edition = "2018"
+edition = "2021"
 
 [package.metadata]
 msrv = "1.60.0" # Used by cargo-msrv
@@ -19,12 +19,12 @@ msrv = "1.60.0" # Used by cargo-msrv
 default = []
 libudev = ["serialport/libudev"]
 
-[dependencies.mio]
-version = "1"
-features = ["os-poll", "os-ext"]
-
 [dependencies]
-serialport = { git = "https://github.com/iancormac84/serialport-rs.git", branch = "5.0.0-proposal-updated-to-main", default-features = false }
+mio = { git = "https://github.com/westy92/mio.git", branch = "windows-sys-0.59", features = [
+    "os-poll",
+    "os-ext",
+] }
+serialport = { git = "https://github.com/iancormac84/serialport-rs.git", branch = "5.0.0-proposal-updated-to-main-and-windows-sys", default-features = false }
 
 [dependencies.log]
 version = "0.4"
@@ -33,7 +33,7 @@ version = "0.4"
 nix = "0.26"
 
 [target.'cfg(windows)'.dependencies]
-winapi = { version = "0.3", features = [
+windows-sys = { version = "0.59", features = [
     "commapi",
     "handleapi",
     "winbase",
