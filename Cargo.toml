@@ -34,10 +34,9 @@ nix = "0.26"
 
 [target.'cfg(windows)'.dependencies]
 windows-sys = { version = "0.59", features = [
-    "commapi",
-    "handleapi",
-    "winbase",
-    "std",
+    "Win32_Devices_Communication",
+    "Win32_Foundation",
+    "Win32_Storage_FileSystem",
 ] }
 
 [dev-dependencies.env_logger]
