@@ -20,12 +20,12 @@ default = []
 libudev = ["serialport/libudev"]
 serde = ["serialport/serde"]
 
-[dependencies.mio]
-version = "1"
-features = ["os-poll", "os-ext"]
-
 [dependencies]
-serialport = { git = "https://github.com/iancormac84/serialport-rs.git", branch = "5.0.0-proposal-updated-to-main", default-features = false }
+mio = { git = "https://github.com/westy92/mio.git", branch = "windows-sys-0.59", features = [
+    "os-poll",
+    "os-ext",
+] }
+serialport = { git = "https://github.com/iancormac84/serialport-rs.git", branch = "5.0.0-proposal-updated-to-main-and-windows-sys", default-features = false }
 
 [dependencies.log]
 version = "0.4"
@@ -34,7 +34,7 @@ version = "0.4"
 nix = { version = "0.29", features = ["term"] }
 
 [target.'cfg(windows)'.dependencies]
-winapi = { version = "0.3", features = [
+windows-sys = { version = "0.59", features = [
     "commapi",
     "handleapi",
     "winbase",
