@@ -20,11 +20,11 @@ default = []
 libudev = ["serialport/libudev"]
 
 [dependencies]
-mio = { git = "https://github.com/westy92/mio.git", branch = "windows-sys-0.59", features = [
+mio = { version = "1", features = [
     "os-poll",
     "os-ext",
 ] }
-serialport = { git = "https://github.com/iancormac84/serialport-rs.git", branch = "5.0.0-proposal-updated-to-main-and-windows-sys", default-features = false }
+serialport = { git = "https://github.com/iancormac84/serialport-rs.git", branch = "5.0.0-proposal-updated-to-main-and-windows-sys-but-0.52", default-features = false }
 
 [dependencies.log]
 version = "0.4"
@@ -36,6 +36,7 @@ nix = "0.26"
 windows-sys = { version = "0.59", features = [
     "Win32_Devices_Communication",
     "Win32_Foundation",
+    "Win32_Security",
     "Win32_Storage_FileSystem",
 ] }
 
