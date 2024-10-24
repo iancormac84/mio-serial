@@ -24,7 +24,7 @@ mio = { version = "1", features = [
     "os-poll",
     "os-ext",
 ] }
-serialport = { git = "https://github.com/iancormac84/serialport-rs.git", branch = "5.0.0-proposal-updated-to-main-and-windows-sys-but-0.52", default-features = false }
+serialport = { git = "https://github.com/iancormac84/serialport-rs.git", branch = "5.0.0-alpha-rebased-on-main", default-features = false }
 
 [dependencies.log]
 version = "0.4"
