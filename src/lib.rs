@@ -23,6 +23,7 @@ use serialport::{
     // Types
     Result,
     SerialPortBuilder,
+    SerialPort,
     StopBits,
 };
 

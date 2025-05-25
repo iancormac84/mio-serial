@@ -27,7 +27,7 @@ fn test_native_from_blocking() {
     let fixture = common::setup_virtual_serial_ports();
     let port = fixture.port_a;
     let native_blocking = mio_serial::new(port, baud_rate)
-        .open_native()
+        .open()
         .unwrap_or_else(|e| panic!("unable to open serial port {port}: {e}"));
 
     let stream = mio_serial::SerialStream::try_from(native_blocking)
